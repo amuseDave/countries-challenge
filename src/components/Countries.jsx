@@ -27,9 +27,6 @@ export default function Countries() {
     gcTime: 1000000,
   });
 
-  console.log(isError);
-  console.log(error);
-
   let dataFiltered;
   if (data && data.length > 0) {
     dataFiltered = data.slice(0, 8);

@@ -2,8 +2,39 @@ import { useSelector, useDispatch } from "react-redux";
 import { MoveLeft } from "lucide-react";
 import { uiActions } from "../store/uiSlicer";
 import populationFormatter from "../util/populationFormatter";
+import { useQuery } from "@tanstack/react-query";
+
+async function getBorderNames(borders) {
+  const allBorders = borders.join(",").toLowerCase();
+  console.log(borders.length);
+
+  if (borders.length === 0) return { border: "no border" };
+
+  try {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+    const res = await fetch(
+      `https://restcountries.com/v3.1/alpha?codes=${allBorders}&fields=name`
+    );
+    const data = await res.json();
+    if (!res.ok) throw { message: "couldn't fetch the countries data" };
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
 
 export default function CountryDetail({ country }) {
+  const { isPending, data, isError, error } = useQuery({
+    queryFn: () => {
+      return getBorderNames(country.borders);
+    },
+    queryKey: [country.name.official],
+  });
+
   const mode = useSelector((state) => state.uiSlicer.mode);
   const dispatch = useDispatch();
   function handleDeselectCountry() {
@@ -24,9 +55,6 @@ export default function CountryDetail({ country }) {
     modeSpan = "text-gray-800 ml-1 font-normal";
   }
 
-  console.log(country);
-  console.log([...Object.values(country.languages)]);
-
   return (
     <section className="max-w-[1100px]">
       <nav className="mt-4 mb-16">
@@ -38,7 +66,7 @@ export default function CountryDetail({ country }) {
           Back
         </button>
       </nav>
-      <div className="grid grid-cols-2 gap-16">
+      <div className="grid grid-cols-[480px_1fr] gap-16">
         <img
           src={country.flags.png}
           alt=""
@@ -50,7 +78,8 @@ export default function CountryDetail({ country }) {
           <div className="grid grid-cols-2 mb-16">
             <div>
               <p className="mb-1 font-bold">
-                Native Name: <span className={modeSpan}></span>
+                Native Name:{" "}
+                <span className={modeSpan}>{country.name.common}</span>
               </p>
               <p className="mb-1 font-bold">
                 Population:{" "}
@@ -63,7 +92,8 @@ export default function CountryDetail({ country }) {
                 <span className={modeSpan}>{country.continents[0]}</span>
               </p>
               <p className="mb-1 font-bold">
-                Sub Region: <span className={modeSpan}></span>
+                Sub Region:{" "}
+                <span className={modeSpan}>{country.subregion}</span>
               </p>
               <p className="font-bold">
                 Capital: <span className={modeSpan}>{country.capital[0]}</span>
@@ -87,6 +117,13 @@ export default function CountryDetail({ country }) {
                 </span>
               </p>
             </div>
+          </div>
+
+          <div className="flex">
+            <p className="font-bold">Border Countries:</p>
+            {isPending && (
+              <div className="items-center self-center w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
+            )}
           </div>
         </div>
       </div>
