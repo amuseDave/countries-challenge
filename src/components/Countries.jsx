@@ -8,7 +8,7 @@ async function getCountry(search) {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 300);
+      }, 100);
     });
 
     const fields =
