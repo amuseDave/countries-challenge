@@ -122,7 +122,7 @@ export default function CountryDetail({ country }) {
           <div className="flex">
             <p className="font-bold">Border Countries:</p>
             {isPending && (
-              <div className="items-center self-center w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
+              <div className="items-center self-center w-5 h-5 ml-5 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
             )}
           </div>
         </div>
