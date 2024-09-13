@@ -59,7 +59,7 @@ export default function CountryDetail({ country }) {
 
   return (
     <section className="max-w-[1200px]">
-      <nav className="mt-4 mb-16">
+      <nav className="mt-4 mb-12 sm:mb-16">
         <button
           onClick={handleDeselectCountry}
           className={`px-6 py-[6px] shadow-md text-base rounded font-semibold ${modeClassesBtn} `}
@@ -68,16 +68,18 @@ export default function CountryDetail({ country }) {
           Back
         </button>
       </nav>
-      <div className="grid grid-cols-[500px_1fr] gap-10">
-        <img
-          src={country.flags.png}
-          alt=""
-          className="object-cover min-h-[320px] rounded-sm "
-        />
+      <div className="grid xl:grid-cols-[500px_1fr] grid-cols-1 xl:max-w-full max-w-[600px] gap-10 ">
+        <div>
+          <img
+            src={country.flags.png}
+            alt=""
+            className="object-cover max-h-[320px] w-full max-w-[460px] rounded-sm "
+          />
+        </div>
 
         <div className={`self-center ${modeClasses} `}>
           <h1 className="text-3xl font-bold mb-7">{country.name.official}</h1>
-          <div className="grid grid-cols-2 mb-16">
+          <div className="grid grid-cols-1 mb-10 sm:mb-16 sm:grid-cols-2 gap-y-8">
             <div>
               <p className="mb-1 font-bold">
                 Native Name:{" "}

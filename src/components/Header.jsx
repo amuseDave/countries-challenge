@@ -18,15 +18,21 @@ export default function Header() {
   }
   return (
     <header
-      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-5 px-14 ${modeClasses} transition-all z-10`}
+      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-4 sm:py-5 px-3 sm:px-14 ${modeClasses} transition-all z-10`}
     >
-      <h1 className="text-xl font-extrabold">Where in the world?</h1>
+      <h1 className="text-[17px] font-extrabold sm:text-xl">
+        Where in the world?
+      </h1>
 
       <div
         onClick={toggleTheme}
-        className="relative font-semibold cursor-pointer"
+        className="relative flex items-center text-[15px] font-semibold cursor-pointer sm:text-base"
       >
-        <Moon size={24} fill="white" className="absolute -left-8" /> Dark Mode
+        <Moon
+          fill="white"
+          className="absolute w-4 h-4 sm:w-6 sm:h-6 -left-5 sm:-left-8"
+        />{" "}
+        Dark Mode
       </div>
     </header>
   );
