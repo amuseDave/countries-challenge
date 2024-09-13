@@ -38,18 +38,17 @@ export default function CountriesSearch() {
   }
 
   return (
-    <aside className="flex justify-between mb-10">
-      <div className="relative flex-1 max-w-[480px] flex mr-10">
+    <aside className="flex flex-col mb-10 md:justify-between md:flex-row">
+      <div className="relative flex-1 md:max-w-[480px] w-full flex mr-10 md:mb-0 mb-6">
         <input
-          className={`flex-1 py-3 pl-16 ${modeClasses} ${classes}`}
+          className={`flex-1 py-3 pl-12 sm:pl-16 ${modeClasses} ${classes}`}
           placeholder="Search for a country..."
           type="text"
           onChange={handleSearch}
           defaultValue={search}
         />
         <Search
-          size="24"
-          className={`absolute -translate-y-1/2 cursor-pointer left-6 top-1/2 ${modeClassesIcon} transition-all`}
+          className={`absolute -translate-y-1/2 cursor-pointer left-4 top-1/2 ${modeClassesIcon} transition-all sm:w-6 sm:h-6 h-5 w-5`}
           onClick={() => {
             console.log("sw");
           }}
@@ -57,7 +56,7 @@ export default function CountriesSearch() {
       </div>
 
       <select
-        className={`pl-4 pr-10 ${modeClasses} ${classes}`}
+        className={`pl-4 pr-10 ${modeClasses} ${classes} md:self-stretch md:py-0 py-3 self-start`}
         onChange={handleFilter}
       >
         <option defaultChecked hidden>

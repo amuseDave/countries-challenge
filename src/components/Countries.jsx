@@ -83,7 +83,7 @@ export default function Countries() {
     modeClasses = "text-gray-950";
   }
   return (
-    <section className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-y-16 gap-x-16 min-h-[50dvh] justify-center">
+    <section className="grid xl:grid-cols-4 gap-x-0 gap-y-7 lg:grid-cols-3 lg:gap-10 sm:grid-cols-2 sm:gap-9 xl:gap-16 min-h-[50dvh] justify-center">
       {isPending && (
         <div className="items-center self-center w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
       )}

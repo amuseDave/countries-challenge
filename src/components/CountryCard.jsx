@@ -24,7 +24,7 @@ export default function CountryCard({ country }) {
 
   return (
     <div
-      className="overflow-hidden rounded-md shadow-md max-w-[320px] max-h-[350px] cursor-pointer"
+      className="overflow-hidden rounded-md shadow-md max-w-[280px] max-h-[350px] cursor-pointer"
       onClick={selectCountry}
     >
       <img

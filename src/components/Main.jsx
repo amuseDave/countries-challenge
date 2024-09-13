@@ -18,7 +18,7 @@ export default function Main() {
   }
   return (
     <main
-      className={`px-16 pb-8 pt-28 min-h-dvh ${modeClasses} transition-all`}
+      className={`sm:px-16 px-8 pb-8 pt-28 min-h-dvh ${modeClasses} transition-all`}
     >
       {!selectedCountry && (
         <>
