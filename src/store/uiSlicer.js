@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   mode: "dark",
+  selectedCountry: null,
 };
 
 const uiSlicer = createSlice({
@@ -11,6 +12,12 @@ const uiSlicer = createSlice({
     toggleTheme(state) {
       if (state.mode === "dark") state.mode = "light";
       else state.mode = "dark";
+    },
+    selectCountry(state, actions) {
+      state.selectedCountry = actions.payload;
+    },
+    deselectCountry(state) {
+      state.selectedCountry = null;
     },
   },
 });

@@ -38,22 +38,12 @@ export default function Countries() {
   return (
     <section className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-y-16 gap-x-16 min-h-[50dvh]">
       {isPending && (
-        <div className="w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
+        <div className="items-center self-center w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
       )}
 
       {dataFiltered
         ? dataFiltered.map((country) => {
-            return (
-              <CountryCard
-                key={country.name.common}
-                country={country}
-                png={country.flags.png}
-                name={country.name.official}
-                population={country.population}
-                continent={country.continents[0]}
-                capital={country.capital[0]}
-              />
-            );
+            return <CountryCard key={country.name.common} country={country} />;
           })
         : null}
     </section>
