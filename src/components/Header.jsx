@@ -18,7 +18,7 @@ export default function Header() {
   }
   return (
     <header
-      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-5 px-14 ${modeClasses} transition-all`}
+      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-5 px-14 ${modeClasses} transition-all z-10`}
     >
       <h1 className="text-xl font-extrabold">Where in the world?</h1>
 

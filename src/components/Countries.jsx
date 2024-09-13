@@ -1,13 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import CountryCard from "./CountryCard";
 
 async function getCountry() {
   try {
-    await new Promise((resolve, reject) => {
+    await new Promise((resolve) => {
       setTimeout(() => {
         resolve();
       }, 1000);
     });
-    const res = await fetch("https://restcountries.com/v3.1/all");
+    const res = await fetch(
+      "https://restcountries.com/v3.1/region/europe?fields=name,capital,currencies,continents,population,subregion,languages,flags,tld,borders"
+    );
     const data = await res.json();
     if (!res.ok) throw { message: "couldn't fetch the countries data" };
     return data;
@@ -17,24 +20,42 @@ async function getCountry() {
 }
 
 export default function Countries() {
-  // const { data, isPending, isError, error } = useQuery({
-  //   queryFn: getCountry,
-  //   queryKey: ["countries"],
-  //   staleTime: 1000000,
-  //   gcTime: 1000000,
-  // });
+  const { data, isPending, isError, error } = useQuery({
+    queryFn: getCountry,
+    queryKey: ["countries"],
+    staleTime: 1000000,
+    gcTime: 1000000,
+  });
 
-  // console.log(data);
-  // console.log(isPending);
-  // console.log(isError);
-  // console.log(error);
+  console.log(isError);
+  console.log(error);
+
+  let dataFiltered;
+  if (data && data.length > 0) {
+    dataFiltered = data.slice(0, 8);
+  }
 
   return (
-    <section className="grid grid-cols-4 min-h-[50dvh] content-center">
-      <div className="w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full  border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
-      {/* {isPending && (
-        <div className="border-t-2 animate-spin border-gray-950 w-28 h-28"></div>
-      )} */}
+    <section className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-y-16 gap-x-16 min-h-[50dvh]">
+      {isPending && (
+        <div className="w-16 h-16 border-2 border-t-4 border-gray-700 rounded-full border-t-gray-300 animate-spin col-span-full justify-self-center"></div>
+      )}
+
+      {dataFiltered
+        ? dataFiltered.map((country) => {
+            return (
+              <CountryCard
+                key={country.name.common}
+                country={country}
+                png={country.flags.png}
+                name={country.name.official}
+                population={country.population}
+                continent={country.continents[0]}
+                capital={country.capital[0]}
+              />
+            );
+          })
+        : null}
     </section>
   );
 }
