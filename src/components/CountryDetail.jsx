@@ -58,7 +58,7 @@ export default function CountryDetail({ country }) {
   }
 
   return (
-    <section className="max-w-[1100px]">
+    <section className="max-w-[1200px]">
       <nav className="mt-4 mb-16">
         <button
           onClick={handleDeselectCountry}
@@ -68,11 +68,11 @@ export default function CountryDetail({ country }) {
           Back
         </button>
       </nav>
-      <div className="grid grid-cols-[480px_1fr] gap-16">
+      <div className="grid grid-cols-[500px_1fr] gap-10">
         <img
           src={country.flags.png}
           alt=""
-          className="object-cover min-h-[360px] rounded-sm "
+          className="object-cover min-h-[320px] rounded-sm "
         />
 
         <div className={`self-center ${modeClasses} `}>
@@ -94,10 +94,11 @@ export default function CountryDetail({ country }) {
               </p>
               <p className="mb-1 font-bold">
                 Sub Region:{" "}
-                <span className={modeSpan}>{country.subregion}</span>
+                <span className={modeSpan}>{country.subregion || "None"}</span>
               </p>
               <p className="font-bold">
-                Capital: <span className={modeSpan}>{country.capital[0]}</span>
+                Capital:{" "}
+                <span className={modeSpan}>{country.capital[0] || "None"}</span>
               </p>
             </div>
             <div>
@@ -108,13 +109,15 @@ export default function CountryDetail({ country }) {
               <p className="mb-1 font-bold">
                 Currencies:{" "}
                 <span className={modeSpan}>
-                  {country.currencies[Object.keys(country.currencies)].name}
+                  {country.currencies[Object.keys(country.currencies)[0]]
+                    ?.name || "None"}
                 </span>
               </p>
               <p className="font-bold">
                 Languages:{" "}
                 <span className={modeSpan}>
-                  {[...Object.values(country.languages)].join(", ")}
+                  {[...Object.values(country.languages)].join(", ") ||
+                    "Unknown"}
                 </span>
               </p>
             </div>

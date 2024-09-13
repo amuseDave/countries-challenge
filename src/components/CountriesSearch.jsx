@@ -1,9 +1,12 @@
 import { Search } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../store/uiSlicer";
+import { useRef } from "react";
 export default function CountriesSearch() {
   const mode = useSelector((state) => state.uiSlicer.mode);
+  const search = useSelector((state) => state.uiSlicer.search);
   const dispatch = useDispatch();
+  const timeoutRef = useRef();
 
   let modeClasses;
   let modeClassesIcon;
@@ -24,7 +27,17 @@ export default function CountriesSearch() {
     dispatch(uiActions.filterCountries(e.target.value));
   }
 
-  function handleSearch(e) {}
+  function handleSearch(e) {
+    console.log(e.target.value);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      dispatch(uiActions.setSearchQuery(e.target.value));
+    }, 600);
+  }
 
   return (
     <aside className="flex justify-between mb-10">
@@ -34,6 +47,7 @@ export default function CountriesSearch() {
           placeholder="Search for a country..."
           type="text"
           onChange={handleSearch}
+          defaultValue={search}
         />
         <Search
           size="24"

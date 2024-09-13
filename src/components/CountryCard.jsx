@@ -24,7 +24,7 @@ export default function CountryCard({ country }) {
 
   return (
     <div
-      className="overflow-hidden rounded-md shadow-md max-w-[320px] cursor-pointer"
+      className="overflow-hidden rounded-md shadow-md max-w-[320px] max-h-[350px] cursor-pointer"
       onClick={selectCountry}
     >
       <img
@@ -44,7 +44,8 @@ export default function CountryCard({ country }) {
           Region: <span className={modeSpan}>{country.region}</span>
         </p>
         <p className="font-semibold">
-          Capital: <span className={modeSpan}>{country.capital[0]}</span>
+          Capital:{" "}
+          <span className={modeSpan}>{country.capital[0] || "None"}</span>
         </p>
       </div>
     </div>

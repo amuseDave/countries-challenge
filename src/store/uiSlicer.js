@@ -5,6 +5,7 @@ const initialState = {
   selectedCountry: null,
   filterBy: null,
   search: undefined,
+  randomStart: undefined,
 };
 
 const uiSlicer = createSlice({
@@ -24,7 +25,13 @@ const uiSlicer = createSlice({
     filterCountries(state, actions) {
       state.filterBy = actions.payload;
     },
-    setSearchQuery(state, actions) {},
+    setSearchQuery(state, actions) {
+      state.search = actions.payload;
+    },
+
+    setRandomSearch(state, actions) {
+      state.randomStart = actions.payload;
+    },
   },
 });
 
