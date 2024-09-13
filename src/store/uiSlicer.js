@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mode: "dark",
   selectedCountry: null,
+  filterBy: null,
+  search: undefined,
 };
 
 const uiSlicer = createSlice({
@@ -19,6 +21,10 @@ const uiSlicer = createSlice({
     deselectCountry(state) {
       state.selectedCountry = null;
     },
+    filterCountries(state, actions) {
+      state.filterBy = actions.payload;
+    },
+    setSearchQuery(state, actions) {},
   },
 });
 

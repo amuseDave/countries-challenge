@@ -1,7 +1,9 @@
 import { Search } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uiActions } from "../store/uiSlicer";
 export default function CountriesSearch() {
   const mode = useSelector((state) => state.uiSlicer.mode);
+  const dispatch = useDispatch();
 
   let modeClasses;
   let modeClassesIcon;
@@ -18,6 +20,12 @@ export default function CountriesSearch() {
     modeClassesIcon = "text-gray-500";
   }
 
+  function handleFilter(e) {
+    dispatch(uiActions.filterCountries(e.target.value));
+  }
+
+  function handleSearch(e) {}
+
   return (
     <aside className="flex justify-between mb-10">
       <div className="relative flex-1 max-w-[480px] flex mr-10">
@@ -25,6 +33,7 @@ export default function CountriesSearch() {
           className={`flex-1 py-3 pl-16 ${modeClasses} ${classes}`}
           placeholder="Search for a country..."
           type="text"
+          onChange={handleSearch}
         />
         <Search
           size="24"
@@ -35,15 +44,19 @@ export default function CountriesSearch() {
         />
       </div>
 
-      <select className={`pl-4 pr-10 ${modeClasses} ${classes}`}>
+      <select
+        className={`pl-4 pr-10 ${modeClasses} ${classes}`}
+        onChange={handleFilter}
+      >
         <option defaultChecked hidden>
           Filter by Region
         </option>
+        <option value="all">All</option>
         <option value="africa">Africa</option>
-        <option value="america">America</option>
+        <option value="americas">America</option>
         <option value="asia">Asia</option>
         <option value="europe">Europe</option>
-        <option value="Oceania">Oceania</option>
+        <option value="oceania">Oceania</option>
       </select>
     </aside>
   );

@@ -13,7 +13,7 @@ async function getBorderNames(borders) {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 1000);
+      }, 500);
     });
     const res = await fetch(
       `https://restcountries.com/v3.1/alpha?codes=${allBorders}&fields=name`
@@ -56,7 +56,6 @@ export default function CountryDetail({ country }) {
     modeSpan = "text-gray-800 ml-1 font-normal transition-all";
     modeTag = "text-gray-800 bg-gray-100 transition-all";
   }
-  console.log(data);
 
   return (
     <section className="max-w-[1100px]">
@@ -91,8 +90,7 @@ export default function CountryDetail({ country }) {
                 </span>
               </p>
               <p className="mb-1 font-bold">
-                Region:{" "}
-                <span className={modeSpan}>{country.continents[0]}</span>
+                Region: <span className={modeSpan}>{country.region}</span>
               </p>
               <p className="mb-1 font-bold">
                 Sub Region:{" "}

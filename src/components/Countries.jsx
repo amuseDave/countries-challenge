@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 import CountryCard from "./CountryCard";
 
-async function getCountry() {
+async function getCountry(search) {
   try {
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 500);
+    // });
     const res = await fetch(
-      "https://restcountries.com/v3.1/region/europe?fields=name,capital,currencies,continents,population,subregion,languages,flags,tld,borders"
+      `https://restcountries.com/v3.1/${
+        search === undefined ? "all" : `name/${search}`
+      }?fields=name,capital,currencies,population,subregion,languages,flags,tld,borders,region`
     );
     const data = await res.json();
     if (!res.ok) throw { message: "couldn't fetch the countries data" };
@@ -20,16 +23,31 @@ async function getCountry() {
 }
 
 export default function Countries() {
+  const filterBy = useSelector((state) => state.uiSlicer.filterBy);
+  const search = useSelector((state) => state.uiSlicer.search);
+
   const { data, isPending, isError, error } = useQuery({
-    queryFn: getCountry,
-    queryKey: ["countries"],
+    queryFn: () => {
+      return getCountry(search);
+    },
+    queryKey: [search],
     staleTime: 1000000,
     gcTime: 1000000,
   });
 
   let dataFiltered;
   if (data && data.length > 0) {
-    dataFiltered = data.slice(0, 8);
+    let randomStartNum = Math.floor(Math.random() * data.length - 20);
+    randomStartNum = randomStartNum < 0 ? 0 : randomStartNum;
+    let randomEndNum = randomStartNum + 20;
+
+    if (!filterBy || filterBy === "all")
+      dataFiltered = data.slice(randomStartNum, randomEndNum);
+    else {
+      dataFiltered = data.filter((data) => {
+        return data.region.toLowerCase() === filterBy;
+      });
+    }
   }
 
   return (

@@ -41,7 +41,7 @@ export default function CountryCard({ country }) {
           </span>
         </p>
         <p className="font-semibold">
-          Region: <span className={modeSpan}>{country.continents[0]}</span>
+          Region: <span className={modeSpan}>{country.region}</span>
         </p>
         <p className="font-semibold">
           Capital: <span className={modeSpan}>{country.capital[0]}</span>
