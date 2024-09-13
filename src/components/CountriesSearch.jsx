@@ -5,11 +5,12 @@ export default function CountriesSearch() {
 
   let modeClasses;
   let modeClassesIcon;
-  const classes = "rounded-sm shadow-lg focus:outline outline-2 font-semibold";
+  const classes =
+    "rounded-sm shadow-lg focus:outline outline-2 font-semibold transition-all";
 
   if (mode === "dark") {
     modeClasses =
-      "bg-gray-700 text-gray-200 placeholder:text-gray-200 outline-gray-200";
+      "bg-gray-700 text-gray-100 placeholder:text-gray-300 outline-gray-200";
     modeClassesIcon = "text-gray-200";
   } else {
     modeClasses =
@@ -21,12 +22,13 @@ export default function CountriesSearch() {
     <aside className="flex justify-between mb-10">
       <div className="relative flex-1 max-w-[480px] flex mr-10">
         <input
-          className={`flex-1 py-3 pl-20 ${modeClasses} ${classes}`}
+          className={`flex-1 py-3 pl-16 ${modeClasses} ${classes}`}
           placeholder="Search for a country..."
           type="text"
         />
         <Search
-          className={`absolute -translate-y-1/2 cursor-pointer left-5 top-1/2 ${modeClassesIcon}`}
+          size="24"
+          className={`absolute -translate-y-1/2 cursor-pointer left-6 top-1/2 ${modeClassesIcon} transition-all`}
           onClick={() => {
             console.log("sw");
           }}

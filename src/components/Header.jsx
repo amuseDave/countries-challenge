@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../store/uiSlicer";
-
+import { Moon } from "lucide-react";
 export default function Header() {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.uiSlicer.mode);
@@ -18,7 +18,7 @@ export default function Header() {
   }
   return (
     <header
-      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-5 px-14 ${modeClasses}`}
+      className={`shadow-lg fixed top-0 left-0 right-0 flex items-center justify-between py-5 px-14 ${modeClasses} transition-all`}
     >
       <h1 className="text-xl font-extrabold">Where in the world?</h1>
 
@@ -26,7 +26,7 @@ export default function Header() {
         onClick={toggleTheme}
         className="relative font-semibold cursor-pointer"
       >
-        Moon Dark Mode
+        <Moon size={24} fill="white" className="absolute -left-8" /> Dark Mode
       </div>
     </header>
   );
