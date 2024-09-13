@@ -13,7 +13,7 @@ async function getBorderNames(borders) {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve();
-      }, 500);
+      }, 300);
     });
     const res = await fetch(
       `https://restcountries.com/v3.1/alpha?codes=${allBorders}&fields=name`

@@ -28,8 +28,6 @@ export default function CountriesSearch() {
   }
 
   function handleSearch(e) {
-    console.log(e.target.value);
-
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
